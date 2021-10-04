@@ -43,6 +43,7 @@ public class GameRunner
 					totalDealerValue = totalDealerValue + dealerHand.get(i).getValue();
 				}
 		}
+		// combine into 1 class
 		public static void displayUserHand()
 			{
 			
