@@ -69,7 +69,7 @@ public class GameRunner
 				{
 					playerHand.add(Deck.deck.get(0));
 					totalPlayerValue = totalPlayerValue + Deck.deck.get(0).getValue();
-					
+					//add in here the code to check if something is an ace and if they bust, make it so that they get to choose if ace is worth one or 11
 					
 					System.out.println("User, you drew a ");
 					System.out.println(Deck.deck.get(0).getRank() + " of "+ Deck.deck.get(0).getSuit() + " with a value of " + Deck.deck.get(0).getValue());
