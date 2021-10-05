@@ -10,6 +10,8 @@ public class GameRunner
 		static int totalPlayerValue;
 		static boolean dealerHanding = true;
 		static boolean playerHanding = true;
+		static int indexOfAce;
+		static int indexOf2Ace;
 		public static void main(String[] args)
 		{
 			greetUser();
@@ -46,7 +48,7 @@ public class GameRunner
 				}
 		}
 
-		
+		//still need to add the splitting of tens and then betting maybe
 		public static void playGame()
 		{
 			System.out.println("User, your hand is: ");
@@ -77,7 +79,20 @@ public class GameRunner
 					Deck.deck.remove(0);
 					if(totalPlayerValue >= 21)
 						{
-							
+							for(int i = 0; i < playerHand.size(); i++)
+								{
+									if(playerHand.get(i).getValue() == 11)
+										{
+											System.out.println("You have an ace in your hand, the ace will now be changed to a value of zero");
+											indexOfAce = i;
+								
+											totalPlayerValue = totalPlayerValue - 10;
+											playGame();
+										}
+										
+									
+								}
+						
 							checkForWinner();
 						}
 				}
@@ -105,7 +120,25 @@ public class GameRunner
 			System.out.println(dealerHand.get(i).getRank() + " of "+ dealerHand.get(i).getSuit() + " with a value of " + dealerHand.get(i).getValue());
 				}
 			System.out.println("The total Dealer value is " + totalDealerValue);
-			if(totalDealerValue >= 17)
+			if(totalDealerValue >= 21)
+				{
+					for(int i = 0; i < dealerHand.size(); i++)
+						{
+							if(dealerHand.get(i).getValue() == 11)
+								{
+									System.out.println("You have an ace in your hand, the ace will now be changed to a value of zero");
+									indexOf2Ace = i;
+						
+									totalDealerValue = totalDealerValue - 10;
+									playGame();
+								}
+								
+							
+						}
+				
+					checkForWinner();
+				}
+			else if(totalDealerValue >= 17)
 				{
 					dealerHanding = false;
 					checkForWinner();
@@ -129,6 +162,7 @@ public class GameRunner
 					System.out.println("You and the dealer both had the same value, therefore it is a push and neither of you lose money!");
 					System.exit(0);
 				}
+			
 			else if(totalDealerValue > 21 && totalPlayerValue <= 21)
 				{
 					System.out.println();
@@ -138,7 +172,7 @@ public class GameRunner
 			else if(totalDealerValue <= 21 && totalPlayerValue > 21)
 				{
 					System.out.println();
-					System.out.println("The Dealer went over 21, and therefore the player wins!");
+					System.out.println("The Player went over 21, and therefore the dealer wins!");
 					System.exit(0);
 				}
 			else if(totalPlayerValue == 21 && totalDealerValue != 21)
