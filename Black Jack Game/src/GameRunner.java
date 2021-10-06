@@ -12,12 +12,12 @@ public class GameRunner
 		static boolean playerHanding = true;
 		static int indexOfAce;
 		static int indexOf2Ace;
+		static int tenCounter;
 		public static void main(String[] args)
 		{
 			greetUser();
 			Deck.shuffle();
 			dealCards();
-		
 			playGame();
 			
 		}
@@ -40,6 +40,19 @@ public class GameRunner
 					playerHand.add(Deck.deck.get(0));
 					Deck.deck.remove(0);
 					totalPlayerValue = totalPlayerValue + playerHand.get(i).getValue();
+//					if(playerHand.get(i).getValue() == 10)
+//						{
+//							tenCounter++;
+//							if(tenCounter == 2)
+//								{
+//									System.out.println("Do you want to split your tens?");
+//									String splitTens = userStringInput.nextLine();
+//									if(splitTens.equals("Yes") || splitTens.equals("yes"))
+//										{
+//											
+//										}
+//								}
+//						}
 				}
 			for(int i = 0; i < 2; i++)
 				{
