@@ -10,8 +10,10 @@ public class GameRunner
 		static int totalPlayerValue;
 		static boolean dealerHanding = true;
 		static boolean playerHanding = true;
-		static int indexOfAce;
-		static int indexOf2Ace;
+		static int aceCounter;
+		static int ace2Counter;
+		
+		
 		static int tenCounter;
 		public static void main(String[] args)
 		{
@@ -65,17 +67,26 @@ public class GameRunner
 		//still need to add the splitting of tens and then betting maybe
 		public static void playGame()
 		{
+			int tenCounter = 0;
 			System.out.println("User, your hand is: ");
 			for(int i = 0; i < playerHand.size(); i++)
 				{
 			System.out.println(playerHand.get(i).getRank() + " of "+ playerHand.get(i).getSuit() + " with a value of " + playerHand.get(i).getValue());
-			
+					if(playerHand.get(i).getValue()== 10)
+						{
+							aceCounter++;
+						}
 				}
 			
 			System.out.println();
 			System.out.println("The value of all of your cards right now is: "+ totalPlayerValue);
-			
-			
+			if(totalPlayerValue == 21)
+				{
+					checkForWinner();
+				}
+			System.out.println();
+			System.out.println("The Dealers Bottom Card Is: "  + dealerHand.get(0).getRank() + " of " + dealerHand.get(0).getSuit() + " with a value of " + dealerHand.get(0).getValue());
+			System.out.println();
 			while(playerHanding = true)
 				{
 			System.out.println("User, do you want to hit or stand?");
@@ -90,18 +101,33 @@ public class GameRunner
 					System.out.println("User, you drew a ");
 					System.out.println(Deck.deck.get(0).getRank() + " of "+ Deck.deck.get(0).getSuit() + " with a value of " + Deck.deck.get(0).getValue());
 					System.out.println("The value of all of your cards right now is: "+ totalPlayerValue);
+					if(totalPlayerValue == 21)
+						{
+							checkForWinner();
+						}
 					Deck.deck.remove(0);
-					if(totalPlayerValue >= 21)
+					if(totalPlayerValue > 21)
 						{
 							for(int i = 0; i < playerHand.size(); i++)
 								{
 									if(playerHand.get(i).getValue() == 11)
 										{
+											if(tenCounter < aceCounter)
+												{
 											System.out.println("You have an ace in your hand, the ace will now be changed to a value of zero");
-											indexOfAce = i;
+												tenCounter++;
 								
 											totalPlayerValue = totalPlayerValue - 10;
 											playGame();
+												}
+											else if(tenCounter >= aceCounter)
+												{
+													checkForWinner();
+												}
+											else
+												{
+													playGame();
+												}
 										}
 										
 									
@@ -125,6 +151,7 @@ public class GameRunner
 		}
 		public static void displayDealerHand()
 		{
+			int ten2Counter = 0;
 			while(dealerHanding)
 				{
 					System.out.println();
@@ -132,19 +159,30 @@ public class GameRunner
 			for(int i = 0; i < dealerHand.size(); i ++)
 				{
 			System.out.println(dealerHand.get(i).getRank() + " of "+ dealerHand.get(i).getSuit() + " with a value of " + dealerHand.get(i).getValue());
+			if(dealerHand.get(i).getValue()== 10)
+				{
+					ace2Counter++;
+				}
 				}
 			System.out.println("The total Dealer value is " + totalDealerValue);
-			if(totalDealerValue >= 21)
+			if(totalDealerValue > 21)
 				{
 					for(int i = 0; i < dealerHand.size(); i++)
 						{
 							if(dealerHand.get(i).getValue() == 11)
 								{
-									System.out.println("You have an ace in your hand, the ace will now be changed to a value of zero");
-									indexOf2Ace = i;
+									if(ten2Counter < ace2Counter)
+										{
+								
+										ten2Counter++;
 						
 									totalDealerValue = totalDealerValue - 10;
-									playGame();
+									displayDealerHand();
+										}
+									else if(ten2Counter >= ace2Counter)
+										{
+											checkForWinner();
+										}
 								}
 								
 							
