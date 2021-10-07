@@ -42,19 +42,6 @@ public class GameRunner
 					playerHand.add(Deck.deck.get(0));
 					Deck.deck.remove(0);
 					totalPlayerValue = totalPlayerValue + playerHand.get(i).getValue();
-//					if(playerHand.get(i).getValue() == 10)
-//						{
-//							tenCounter++;
-//							if(tenCounter == 2)
-//								{
-//									System.out.println("Do you want to split your tens?");
-//									String splitTens = userStringInput.nextLine();
-//									if(splitTens.equals("Yes") || splitTens.equals("yes"))
-//										{
-//											//fill into next array and then use it to re-run game
-//										}
-//								}
-//						}
 				}
 			for(int i = 0; i < 2; i++)
 				{
@@ -63,8 +50,9 @@ public class GameRunner
 					totalDealerValue = totalDealerValue + dealerHand.get(i).getValue();
 				}
 		}
+		
 
-		//still need to add the splitting of tens and then betting maybe
+		
 		public static void playGame()
 		{
 			int tenCounter = 0;
@@ -144,7 +132,7 @@ public class GameRunner
 			else
 				{
 					System.out.println("You must either pick hit or stand,");
-					//playGame();
+					
 				}
 				}
 			
