@@ -49,7 +49,7 @@ public class GameRunner
 //									String splitTens = userStringInput.nextLine();
 //									if(splitTens.equals("Yes") || splitTens.equals("yes"))
 //										{
-//											
+//											//fill into next array and then use it to re-run game
 //										}
 //								}
 //						}
